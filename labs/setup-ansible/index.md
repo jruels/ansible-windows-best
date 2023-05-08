@@ -61,7 +61,7 @@ Back on the Windows machine, in the VS Code Explorer pane:
 5. Paste the code below into the file
 
     ```
-    ---
+   ---
     webservers:
       hosts:
         webserver1:
