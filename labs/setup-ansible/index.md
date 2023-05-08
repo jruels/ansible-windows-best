@@ -105,7 +105,7 @@ If you get an error about "user.email" and "user.name" not being set, do the fol
 
 1. Open PowerShell and type: 
    1. `cd "C:\Program Files\Git\bin"`
-   2. `git config --global user.name "< your name >`
+   2. `git config --global user.name "< your name >"`
    3. `git config --global user.email "< your email address >"`
 7. Click on the "..." menu in the "Source Control" pane, and select "Push" to push the changes to GitHub.
 8. If you are prompted, log into GitHub to authenticate.
@@ -120,7 +120,7 @@ If you get an error about "user.email" and "user.name" not being set, do the fol
 4. Clone the `ansible-working` repository to retrieve our `inventory_simple.yml` and `ansible.cfg` files.
 
     ```
-    cd /home/ansible
+    cd /home/ubuntu
     git clone https://github.com/<Your Account>/ansible-working.git
     ```
 3. Navigate to the directory where you cloned repository.
