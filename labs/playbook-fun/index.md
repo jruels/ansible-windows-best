@@ -63,9 +63,6 @@ In the VS Code Explorer pane:
    ---
    - name: Ensure IIS is installed and started 
      hosts: webservers
-     become: yes 
-     become_method: runas
-     become_user: Administrator
      vars:
        ansible_connection: winrm
        ansible_winrm_transport: ntlm
