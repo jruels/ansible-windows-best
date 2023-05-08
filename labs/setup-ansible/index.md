@@ -190,7 +190,7 @@ Lets use the `ping` and `win_ping` modules again to enure that we can access the
 
   ```
   ansible -i inventory_simple.yml webserver1 -m win_ping 
-  ansible -i inventory_simple webserver2 -m ping 
+  ansible -i inventory_simple.yml webserver2 -m ping 
   ```
 
   > This will succeed now because WinRM is enabled and its ports are opened on the firewall
