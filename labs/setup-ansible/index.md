@@ -79,7 +79,7 @@ Back on the Windows machine, in the VS Code Explorer pane:
           
 > In the real world we would not want to store the windows credentials in plain text in our inventory file. We will deal with this issue in the vault lab.    
  
- ## Create an ansible.cfg file to set ansible defaults including the inventory file to use
+## Create an ansible.cfg file to set ansible defaults including the inventory file to use
  
  In the VS Code Explorer pane:
 
