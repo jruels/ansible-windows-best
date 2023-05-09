@@ -9,7 +9,7 @@ Create the Ansible playbook that will use the template to configure the `web.con
 
 1. In Visual Studio Code.
 2. Click the "Explorer" icon on the left sidebar.
-5. Right-click on the root folder of your `ansible-working` repo and choose "New File".
+5. Right-click on the root folder of your `ansible-working` repo and choose `New File`.
 6. Name the file `configure.yml`.
 7. Copy and paste the following code into `configure.yml`:
 
