@@ -44,15 +44,6 @@ Log in to the control node as `ec2-user`
 
 ### Install Automation Platform 
 
-
-Install `subscription-manager`
-
-```bash
-sudo yum install -y subscription-manager
-```
-
-
-
 Register VM with Red Hat package repos
 
 ```bash
@@ -67,13 +58,13 @@ Click [Here](https://access.redhat.com/downloads/content/480) to download the An
 
 * Log in to the portal 
 
-* At the top change the Version to `2.2 for RHEL 8`
+* Download Ansible Automation Platform 2.3 for RHEL 9
 
-  ![image-20220913012736465](images/image-20220913012736465.png)
+  <img src="images/image-20230509011301795.png" alt="image-20230509011301795" style="zoom:50%;" />
 
 * Click the "Download Now" link on the "Bundle" installer
 
-  ![image-20220913022904472](images/image-20220913022904472.png)
+  <img src="images/image-20230509011432308.png" alt="image-20230509011432308" style="zoom:50%;" />
   
   
 
@@ -136,7 +127,7 @@ tar -zxvf ansible-automation-platform-setup-*.tar.gz
 Enter directory 
 
 ```bash
-cd ansible-automation-platform-setup-2.2.1-1
+cd ansible-automation-platform-setup*
 ```
 
 
@@ -212,7 +203,11 @@ sudo ./setup.sh -e required_ram=2048
 
 After the script above completes, you can access the Dashboard at the following URL (replacing `Server IP` with your lab VM IP)  
 
-https://[Server IP]/#/login
+`https://Server IP`
+
+
+
+If you're warned the SSL certificate is not valid, ignore the warning and load the page anyway. 
 
 
 
@@ -228,7 +223,7 @@ Log into the dashboard with the username `admin` and the password you specified 
 
 
 
-You will see a screen asking to register Automation Platform. Log in with your developer credentials.
+You will see a screen asking to register Automation Platform. Log in with your Red Hat developer credentials.
 
 <img src="images/image-20220222022946979.png" alt="image-20220222022946979" style="zoom: 33%;" />
 
