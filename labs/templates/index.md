@@ -15,7 +15,7 @@ Create the Ansible playbook that will use the template to configure the `web.con
 
 ```
 - name: Configure web.config for SQL connection string
-  hosts: all
+  hosts: windows
   vars:
     ip_address: 10.0.0.1
     database_name: mydatabase
