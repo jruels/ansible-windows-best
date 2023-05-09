@@ -123,6 +123,11 @@ tar -zxvf ansible-automation-platform-setup-*.tar.gz
 ```
 
 
+Remove the tarball
+
+```bash
+rm -rf ansible-automation-platform-setup-*.tar.gz
+```
 
 Enter directory 
 
