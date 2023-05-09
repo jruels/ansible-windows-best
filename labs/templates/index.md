@@ -59,7 +59,7 @@ This template includes a configuration option to update the database connection 
 - Database user name
 - Database password
 
-In VS Code, copy the `ansible.cfg and inventory.yml` files to the root `ansible-working` directory, commit them, and push to GitHub.
+In VS Code, copy the `ansible.cfg` and `inventory.yml` files to the root `ansible-working` directory, commit them, and push to GitHub.
 
 ## Step 3: Run the playbook
 
