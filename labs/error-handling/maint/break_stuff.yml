@@ -1,19 +1,20 @@
 - hosts: localhost
   connection: local
-  become: yes
+  become: no
   become_user: root
   tasks:
     - name: "Simulate connection failure"
       lineinfile:
-        path: /etc/hosts
-        line: 127.0.0.1 bit.ly
+        path: ~/ansible-working/error-handling/report.yml
+        regex: "url:."
+        line:  '            url: https://bit.ly/3dtJtR8'
       tags:
       - service_down
-        
+
     - name: "Restore service"
       lineinfile:
-        path: /etc/hosts
-        line: 127.0.0.1 bit.ly
-        state: absent
+        path: ~/ansible-working/error-handling/report.yml
+        regex: "url:."
+        line:  '            url: https://bit.ly/3dtJtR7'
       tags:
       - service_up
