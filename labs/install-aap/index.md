@@ -161,8 +161,13 @@ ping aap.localhost.com
 
 
 
-Copy and paste this sample inventory.
+Remove the default `inventory` file
+```
+rm -rf inventory
+```
 
+
+Create a new `inventory` file with the following:
 ```
 [automationcontroller]
 aap.localhost.com ansible_connection=local
