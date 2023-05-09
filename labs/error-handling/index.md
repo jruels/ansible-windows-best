@@ -120,6 +120,7 @@ linux:
       ansible_user: ubuntu
       ansible_ssh_private_key_file: /home/ubuntu/.ssh/id_rsa
 ```
+Make sure you update your `ansible.cfg` to point to the new inventory file.
 
 ### Step 3: Commit and Push Changes to GitHub
 
