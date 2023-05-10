@@ -33,17 +33,19 @@ The following commands can be used to download and install the `7-Zip` package. 
 
 3. Run the following ad-hoc command to download the 7zip MSI package on the Windows host:
 
-```bash
- ansible webserver1 -m win_get_url -a "url=https://www.7-zip.org/a/7z2201-x64.msi dest=C:\gitrepos\7z.msi"
-```
+  ```bash
+  ansible webserver1 -m win_get_url -a "url=https://www.7-zip.org/a/7z2201-x64.msi dest=C:\gitrepos\7z.msi"
+  ```
 
 4. Run the following ad-hoc command to install the 7zip package on the Windows host:
 
-```bash
-ansible webserver1 -m win_package -a "path=C:\gitrepos\7z.msi state=present"
-```
+  ```bash
+  ansible webserver1 -m win_package -a "path=C:\gitrepos\7z.msi state=present"
+  ```
+
 
 5. Run the following ad-hoc command to list the installed packages
-```bash
-ansible webserver1 -m win_command -a "powershell Get-WmiObject -Class Win32_Product | Select-Object Name, Version"
-```
+
+  ```bash
+  ansible webserver1 -m win_command -a "powershell Get-WmiObject -Class Win32_Product | Select-Object Name, Version"
+  ```
