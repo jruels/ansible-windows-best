@@ -1,0 +1,9 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: install Apache
+      apt: name=apache2 state=latest
+    - name: start and enable httpd
+      service: name=apache state=started enabled=yes
+

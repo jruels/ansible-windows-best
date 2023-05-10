@@ -1,0 +1,11 @@
+<VirtualHost {{ ansible_default_ipv4.address }}:80>
+ServerAdmin webmaster@xyzcorp.com
+DocumentRoot /var/www/html
+
+<Directory "/var/www/html">
+  AuthType Basic
+  Authname "Authorized Users Only"
+  AuthUserFile /etc/httpd/conf/htpasswd
+  Require valid-user
+</Directory>
+</VirtualHost>
