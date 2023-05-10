@@ -79,19 +79,11 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
        name: ansible
        password: Password123
        state: present
+       groups:
+      - Users Administrators
      become: yes  
      ignore_errors: yes
      register: result
-
-   - name: Check if user is already a member of the group
-     debug:
-       msg: "User ansible is already a member of the Administrators group"
-     when: "'The specified account name is already a member of the group.' in result.stderr"
-
-   - name: Add user to the group if not already a member
-     win_command: 'net localgroup "Administrators" ansible /add'
-     become: yes
-     when: "'The specified account name is already a member of the group.' not in result.stderr"
    ```
 
    This code creates a new user named `ansible` with the password `Password123`, adds the user to the `Administrators` group, grants the user remote desktop access, and grants the user administrator privileges.
