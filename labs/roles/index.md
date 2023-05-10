@@ -80,7 +80,7 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
        password: Password123
        state: present
        groups:
-         - Users Administrators
+         - Administrators
      become: yes  
      ignore_errors: yes
      register: result
