@@ -1,6 +1,6 @@
 # Lab: Using Ansible Roles to Create a Windows User with Permissions, Connect Ansible with that Account, Install IIS, Create a Web.config File, and Copy Web Files
 
-In this lab, you will learn how to use Ansible roles to break down the tasks of creating a Windows user with permissions to install services, connecting Ansible with that account, installing IIS, creating a Web.config file using a template, and copying web files to the `c:\inetpub\wwwroot` folder. You will edit files using Visual Studio Code, commit and push changes to your GitHub repository named `ansible-working`, and use an SSH connection in PuTTY to pull down the files to the Ansible Control host before executing the Ansible playbook.
+In this lab, you will learn how to use Ansible roles to break down the tasks of creating a Windows user with permissions to install services, connecting Ansible with that account, installing IIS, creating a `web.config` file using a template, and copying web files to the `c:\inetpub\wwwroot` folder. You will edit files using Visual Studio Code, commit and push changes to your GitHub repository named `ansible-working`, and use an SSH connection in PuTTY to pull down the files to the Ansible Control host before executing the Ansible playbook.
 
 ## Prerequisites
 
