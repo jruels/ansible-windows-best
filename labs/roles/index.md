@@ -74,9 +74,12 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
 1. Open the `tasks/main.yml` file in the `create-user` role and add the following code:
 
    ```
-   - name: Grant user privileges
-     win_command: 'net localgroup "Administrators" ansible /add'
-     become: yes
+   - name: Create user ansible
+     win_user: 
+       name: ansible
+       password: Password123
+       state: present
+     become: yes  
      ignore_errors: yes
      register: result
 
