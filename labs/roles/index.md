@@ -114,40 +114,7 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
 
 3. Save the `main.yml` file and close it.
 
-## Step 7: Creating a Web.config File Using a Template
-
-The next step is to create a Web.config file using a template.
-User the explorer pane in VS Code to navigate to the appropriate folders and edit files
-
-1. In the `templates` folder inside the `create-web-config` role folder.
-
-2. Create a new file named `web.config.j2` and add the following code:
-
-   ```
-   <?xml version="1.0" encoding="UTF-8"?>
-   <configuration>
-     <appSettings>
-       <add key="sqlConnectionString" value="Server={{ ip_address }};Database={{ database_name }};User ID={{ db_username }};Password={{ db_password }};"/>
-     </appSettings>
-   </configuration>
-   ```
-
-   This is a sample Web.config file that will be used to configure IIS.
-
-3. Open the `tasks/main.yml` file in the `create-web-config` role and add the following code:
-
-   ```
-   - name: Create web.config file
-     template:
-       src: templates/web.config.j2
-       dest: c:/inetpub/wwwroot/web.config
-   ```
-
-   This code creates a new `web.config` file using the `web.config.j2` template and copies it to the `C:\inetpub\wwwroot` folder. The `{{ python_path }}` variable is replaced with the path to Python 3.7.
-
-4. Save the `main.yml` and `web.config.j2` files and close them.
-
-## Step 8: Copying Web Files to the `c:\inetpub\wwwroot` Folder
+## Step 7: Copying Web Files to the `c:\inetpub\wwwroot` Folder
 
 The next step is to copy the web files to the `c:\inetpub\wwwroot` folder.
 User the explorer pane in VS Code to navigate to the appropriate folders and edit files
@@ -165,7 +132,7 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
 
 2. Save the `main.yml` file and close it.
 
-## Step 9: Combining the Roles in an Ansible Playbook
+## Step 8: Combining the Roles in an Ansible Playbook
 
 The final step is to combine the roles in an Ansible playbook.
 User the explorer pane in VS Code to navigate to the appropriate folders and edit files
@@ -200,7 +167,7 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
 
 2. Save the `roles_playbook.yml` file and close it.
 
-## Step 10: Save and Push files to the `ansible-working` repo
+## Step 9: Save and Push files to the `ansible-working` repo
 
 1. In the sidebar, click on the "Source Control" icon (it looks like a branch).
 2. In the File menu select Save All
@@ -209,13 +176,13 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
 5. Click the checkmark icon to commit the changes.
 6. Click on the "..." menu in the "Source Control" pane, and select "Push" to push the changes to GitHub.
 
-## Step 11: Update the Ansible Control Host
+## Step 10: Update the Ansible Control Host
 
 1. Return to the connection to your Ansible control host in PuTTY on Windows Target 1.
 2. Navigate to the directory where you cloned repository.
 3. Run `git pull` to update the repository on the control host.
 
-## Step 12: Executing the Ansible Playbook
+## Step 11: Executing the Ansible Playbook
 
 To execute the Ansible playbook, follow these steps:
 
