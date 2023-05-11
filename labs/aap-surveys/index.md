@@ -125,7 +125,7 @@ You have installed IIS on your node in the job you just ran. Now we’re going t
 
 We are going to use the files from the earlier `roles` lab. 
 
-* Update `roles_playbook.yml` to target `all` hosts
+* Update `roles_playbook.yml` to target `all` hosts, and remove the `copy-web-files` role.
 
 * In the `templates` folder, create `index.html.j2` containing:
 
