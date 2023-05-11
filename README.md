@@ -26,3 +26,8 @@ Lab 7: [Install Ansible Tower](labs/install-aap/)
 Lab 8: [Ansible Vault](labs/ansible-vault/)   
 Lab 9: [Ansible Roles](labs/roles/)   
 Lab 10: [Ansible Tower Tasks](labs/aap-inventory-creds-ad-hoc/)   
+
+### Day 4   
+Lab 12: [Ansible Projects & Templates](labs/aap-projects-templates-jobs/)   
+Lab 13: [Ansible Tower Surveys](labs/aap-surveys/)   
+Lab 14: [Ansible RBAC](labs/aap-rbac)   
