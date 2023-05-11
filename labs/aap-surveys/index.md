@@ -127,7 +127,7 @@ We are going to use the files from the earlier `roles` lab.
 
 * Update `roles_playbook.yml` to target `all` hosts
 
-* In the `templates` folder, create `index.html.j2` containing:
+* Under `create-web-config`, in the `templates` folder, create `index.html.j2` containing:
 
   ```yaml
   <html>
