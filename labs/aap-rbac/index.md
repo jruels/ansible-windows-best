@@ -87,7 +87,7 @@ Add the permission to use the `Uninstall IIS` template:
 Now log out of Automation Controller’s web UI and in again as the **wweb** user.
 
 - Go to the **Templates** view, you should notice for **wweb** only the `Uninstall IIS` template is listed. He is allowed to view and launch, but not to edit the Template (no Edit button available).
-- Run the Job Template by clicking the rocket icon. Enter the values for the survey questions and launch the job.
+- Run the Job Template by clicking the rocket icon, and launch the job.
 - In the following **Jobs** view have a good look around, note that there were changes to the host (as expected).
 
 After the Job has finished, confirm that IIS was uninstalled by running the following PowerShell command on the Windows node.
@@ -100,7 +100,7 @@ You enabled a restricted user to run an Ansible playbook
 - Without being able to change the playbook itself
 - But with the ability to change variables you predefined
 
-Effectively you provided the power to execute automation to another user without handing out your credentials or giving the user the ability to change the automation code. And yet, at the same time the user can still modify things based playbooks you created.
+Effectively you provided the power to execute automation to another user without handing out your credentials or giving the user the ability to change the automation code. 
 
 This capability is one of the main strengths of Ansible automation controller.
 
