@@ -163,7 +163,6 @@ Create a new Template with the following:
 * **Execution Environment**: Default
 * **Playbook**: roles_playbook.yml
 * **Credentials**: win_cred
-* **Limit**: web
 * **Options**: Privilege Escalation
 * Click **Save**
 
