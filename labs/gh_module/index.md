@@ -1,0 +1,367 @@
+# Build a Custom Ansible Module
+
+## Overview
+
+Ansible modules are the building blocks for building Ansible playbooks. They are small pieces of python code that can be triggered from the `yaml` in a playbook. Ansible provides many modules, but sometimes you must develop your own for specific use cases. 
+
+Ansible modules are reusable, standalone scripts that can be used by the Ansible API or the `ansible` or `ansible-playbook` programs. They return information to Ansible by printing a JSON string to stdout before exiting.
+
+Often times custom modules are a nice way to interact more fluently with services that provide a RESTful API—for example, GitHub or Pivotal. You can interact with these services with the URI module, but it can be more complicated.
+
+## Create a custom module 
+Writing an Ansible module is not difficult. Modules can be written in any language, but we will use Python for this lab. 
+
+We'll create a quick little module to create or delete a repository on GitHub.
+
+Let's start with a basic scaffolding to see how a custom module works. 
+
+### Step 2: Edit files in VS Code
+
+1. In VS Code, create a new folder `gh_module` in the `ansible-working` repository.
+2. Create a `library` folder in  `gh_module`.
+3. Create a new file named  `github_repo.py` in the `gh_module` folder.
+4. Create a new file `play.yml`
+
+You should have the following directory / file structure under `gh_module`: 
+
+```
+|play.yml
+[library]
+  |_ github_repo.py
+```
+
+The custom module lives in the `library` directory and has the name we will call from our playbook `github_repo`. 
+
+Add the following to `github_repo.py`
+
+```python
+#!/usr/bin/python
+
+from ansible.module_utils.basic import *
+
+def main():
+
+	 module = AnsibleModule(argument_spec={})
+	 response = {"hello": "world"}
+	 module.exit_json(changed=False, meta=response)
+
+
+if __name__ == '__main__':
+    main()
+```
+
+**Notes** 
+
+* `main()` is the entrypoint into the module.
+* `#!/user/bin/python` is required. Do not forget it! 
+* `AnsibleModule` comes from `from ansible.module_utils.basic import *`. It is imported with the `*`
+* `AnsibleModule` handles incoming and outgoing parameters.
+
+Now create a playbook `play.yml` with the following: 
+
+```yml
+- hosts: localhost
+  tasks:
+    - name: Test that my module works
+      github_repo:
+      register: result
+
+    - debug: var=result
+```
+
+This playbook confirms our module is working as expected and dumps the output to `debug`. 
+
+Because we have not specified an inventory, Ansible will run the playbook on `localhost`
+
+### Step 3: Commit and Push Changes to GitHub
+
+1. In the sidebar, click on the "Source Control" icon (it looks like a branch).
+2. In the "Source Control" pane, review the changes you made to the playbook file.
+3. Enter a commit message that describes the changes you made.
+4. Click the checkmark icon to commit the changes.
+5. Click on the "..." menu in the "Source Control" pane, and select "Push" to push the changes to GitHub.
+
+### Step 4: Update the Ansible Control Host
+
+1. Connect to your Ansible control host.
+2. Navigate to the directory where you cloned the repository.
+3. Run `git pull` to update the repository on the control host.
+
+Run the playbook:
+
+```
+ansible-playbook play.yml
+```
+
+Sample output: 
+```
+PLAY ***************************************************************************
+
+TASK [setup] *******************************************************************
+ok: [localhost]
+
+TASK [Test that my module works] ***********************************************
+ok: [localhost]
+
+TASK [debug] *******************************************************************
+ok: [localhost] => {
+    "result": {
+        "changed": false,
+        "meta": {
+            "hello": "world"
+        }
+    }
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0
+
+```
+
+It worked! Now that we know the module works, we can add code to create/delete GitHub repositories. 
+
+Update the `main` function to handle input to create a GitHub repo. 
+
+```python
+def main():
+
+    fields = {
+        "github_auth_key": {"required": True, "type": "str"},
+        "username": {"required": True, "type": "str"},
+        "name": {"required": True, "type": "str"},
+        "description": {"required": False, "type": "str"},
+        "private": {"default": False, "type": "bool"},
+        "has_issues": {"default": True, "type": "bool"},
+        "has_wiki": {"default": True, "type": "bool"},
+        "has_downloads": {"default": True, "type": "bool"},
+        "state": {
+            "default": "present",
+            "choices": ['present', 'absent'],
+            "type": 'str'
+        },
+    }
+
+    module = AnsibleModule(argument_spec=fields)
+    module.exit_json(changed=False, meta=module.params)
+```
+
+**Notes** 
+
+* The expected inputs are defined as a dictionary.
+* You can specify if a field is  `required`, using a `default` value, and limit possible inputs with `choices`.
+
+The above code accepts and pipes the parsed inputs `module.params` to `exit_json`.
+
+Update the playbook with some more fields:
+
+```yml
+- name: Create a github Repo
+      github_repo:
+        github_auth_key: "..."
+        username: "YOUR GITHUB USERNAME HERE"
+        name: "Hello-World"
+        description: "This is your first repository"
+        private: yes
+        has_issues: no
+        has_wiki: no
+        has_downloads: no
+        state: present
+      register: result
+```
+
+Push your code to GitHub and execute a `git pull` on the Ubuntu server.
+
+Run the playbook, and it will display a dictionary of inputs passed in. 
+
+```sh
+ansible-playbook play.yml
+```
+
+
+Ansible recommends adding documentation with examples of using the module. At the top of the module add: 
+```yml
+DOCUMENTATION = '''
+---
+module: github_repo
+short_description: Manage your repos on Github
+'''
+
+EXAMPLES = '''
+- name: Create a github Repo
+  github_repo:
+    github_auth_key: "..."
+    name: "Hello-World"
+    description: "This is your first repository"
+    private: yes
+    has_issues: no
+    has_wiki: no
+    has_downloads: no
+  register: result
+
+- name: Delete that repo
+  github_repo:
+    github_auth_key: "..."
+    name: "Hello-World"
+    state: absent
+  register: result
+'''
+```
+
+
+Now update the module with a function to create a GitHub repository
+
+```python
+from ansible.module_utils.basic import *
+import requests
+
+api_url = "https://api.github.com"
+
+
+def github_repo_present(data):
+
+    api_key = data['github_auth_key']
+
+    del data['state']
+    del data['github_auth_key']
+
+    headers = {
+        "Authorization": "token {}" . format(api_key)
+    }
+    url = "{}{}" . format(api_url, '/user/repos')
+    result = requests.post(url, json.dumps(data), headers=headers)
+
+    if result.status_code == 201:
+        return False, True, result.json()
+    if result.status_code == 422:
+        return False, False, result.json()
+
+    # default: something went wrong
+    meta = {"status": result.status_code, 'response': result.json()}
+    return True, False, meta
+```
+
+
+Add a function to delete the repository. 
+
+```python
+def github_repo_absent(data=None):
+    headers = {
+        "Authorization": "token {}" . format(data['github_auth_key'])
+    }
+    url = "{}/repos/{}/{}" . format(api_url, data['username'], data['name'])
+    result = requests.delete(url, headers=headers)
+
+    if result.status_code == 204:
+        return False, True, {"status": "SUCCESS"}
+    if result.status_code == 404:
+        result = {"status": result.status_code, "data": result.json()}
+        return False, False, result
+    else:
+        result = {"status": result.status_code, "data": result.json()}
+        return True, False, result
+```
+
+Define the input fields to be used in your playbook. 
+```python
+def main():
+
+    fields = {
+        "github_auth_key": {"required": True, "type": "str"},
+        "username": {"required": True, "type": "str"},
+        "name": {"required": True, "type": "str"},
+        "description": {"required": False, "type": "str"},
+        "private": {"default": False, "type": "bool"},
+        "has_issues": {"default": True, "type": "bool"},
+        "has_wiki": {"default": True, "type": "bool"},
+        "has_downloads": {"default": True, "type": "bool"},
+        "state": {
+            "default": "present",
+            "choices": ['present', 'absent'],
+            "type": 'str'
+        },
+    }
+
+    choice_map = {
+        "present": github_repo_present,
+        "absent": github_repo_absent,
+    }
+
+    module = AnsibleModule(argument_spec=fields)
+    is_error, has_changed, result = choice_map.get(
+        module.params['state'])(module.params)
+
+    if not is_error:
+        module.exit_json(changed=has_changed, meta=result)
+    else:
+        module.fail_json(msg="Error deleting repo", meta=result)
+
+
+if __name__ == '__main__':
+    main()
+
+```
+
+This module includes the following: 
+
+* `api_url`: Hardcoded URI of GitHub's REST API
+* A list of fields passed from the playbook.
+  * All of the fields with `data` in front of them are values provided by the playbook.
+  * `github_auth_key`: Personal Access Token created earlier.
+  * `state`: The state has two options `present`, `absent`.
+  * `username`: The GitHub account Ansible is managing.
+  * `name`: Name of GitHub repository being created/deleted.
+  * `description`: Description for repository
+  * `private`: Create a private or public repository
+
+There are additional options listed in the `main` function, which we will not go over in detail. 
+
+## Update our playbook
+Update the `play.yml` playbook with tasks to create the repository. 
+
+Here is a sample of what that might look like: 
+
+```yml
+- hosts: localhost
+  vars:
+    - github_token: "YOUR TOKEN HERE"
+    - ansible_python_interpreter: "/usr/bin/python3"
+  tasks:
+    - name: Create a GitHub Repo
+      gh_repo:
+        github_auth_key: {% raw %} "{{github_token}}" {% endraw %}
+        username: "YOUR GITHUB USERNAME HERE"
+        name: "Hello-World"
+        description: "First repo created with custom Ansible module"
+        private: yes
+        has_issues: no
+        has_wiki: no
+        has_downloads: no
+        state: present
+      register: result
+```
+
+Push your code to GitHub and execute a `git pull` on the Ubuntu server.
+
+
+
+Run the playbook and confirm it created the `Hello-World` repository. 
+
+Update the playbook with the following task to delete the repository. Remember to add tags so you can choose which task to run.
+
+```yml
+    - name: Delete GitHub Repo
+      gh_repo:
+        github_auth_key: {% raw %} "{{github_token}}" {% endraw %}
+        username: "YOUR GITHUB USERNAME HERE"
+        name: "Hello-World"
+        state: absent
+```
+
+The above playbook declares the `github_token` variable in plain text. This is not secure, and should be avoided. 
+
+Use `ansible-vault` to create an encrypted variable for `github_token`, and update the playbook to use it. 
+
+To further enhance the playbook, create a variable for the GitHub repo name. 
+
+## Congrats 
+
