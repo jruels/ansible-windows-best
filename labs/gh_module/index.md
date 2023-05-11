@@ -19,8 +19,8 @@ Let's start with a basic scaffolding to see how a custom module works.
 
 1. In VS Code, create a new folder `gh_module` in the `ansible-working` repository.
 2. Create a `library` folder in  `gh_module`.
-3. Create a new file named  `github_repo.py` in the `gh_module` folder.
-4. Create a new file `play.yml`
+3. Create a new file named  `github_repo.py` in the `library folder` under  `gh_module`.
+4. Create a new file `play.yml` in the `gh_module` directory.
 
 You should have the following directory / file structure under `gh_module`: 
 
