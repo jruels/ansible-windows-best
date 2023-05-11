@@ -327,7 +327,7 @@ Here is a sample of what that might look like:
     - ansible_python_interpreter: "/usr/bin/python3"
   tasks:
     - name: Create a GitHub Repo
-      gh_repo:
+      github_repo:
         github_auth_key: {% raw %} "{{github_token}}" {% endraw %}
         username: "YOUR GITHUB USERNAME HERE"
         name: "Hello-World"
@@ -350,7 +350,7 @@ Update the playbook with the following task to delete the repository. Remember t
 
 ```yml
     - name: Delete GitHub Repo
-      gh_repo:
+      github_repo:
         github_auth_key: {% raw %} "{{github_token}}" {% endraw %}
         username: "YOUR GITHUB USERNAME HERE"
         name: "Hello-World"
