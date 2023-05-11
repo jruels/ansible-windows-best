@@ -199,4 +199,4 @@ Before the actual launch, the survey will ask for **First Line** and **Second Li
 
 If all is good, run the Job by clicking **Launch**.
 
-After the job has completed, load `localhost` on your Windows machine and confirm it shows the vaules you supplied.
+After the job has completed, load `localhost` on your Windows machine and confirm it shows the values you supplied.
