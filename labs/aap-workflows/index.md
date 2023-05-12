@@ -180,6 +180,17 @@ Inside of the `create-web-config` -> `tasks` directory update `main.yml` with:
     dest: c:\inetpub\wwwroot\web.config
 ```
 
+Confirm the `templates` `web.config.j2` file has the following: 
+
+```jinja2
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appSettings>
+    <add key="sqlConnectionString" value="Server=;Database=;User ID=;Password=;"/>
+  </appSettings>
+</configuration>
+```
+
 
 
 Commit and push your changes to your repository.
