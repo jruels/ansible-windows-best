@@ -94,12 +94,12 @@ In the same fashion, add a second **Survey Question**
     - Yes
     - No
   - Default Answer
-    - Yes
+    - No
 - Click **Save**
 - Click the toggle to turn the Survey questions to **Enabled**
 
 Sart the job by clicking the blue **Launch** button, or by clicking on the rocket in the Job Templates overview. 
 
-When prompted, choose update categories. answer `Yes` to *Reboot after install?* and click next.
+When prompted, choose update categories. answer `No` to *Reboot after install?* and click next.
 
 After launching the Job Template, you are automatically brought to the job overview where you can follow the playbook execution in real-time.
