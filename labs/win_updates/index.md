@@ -34,7 +34,7 @@ In Ansible Tower, resync your project so the new files show up.
 ### Create a Job Template and Run a Job
 
 1. In Chrome, navigate to the public IP of your Ansible Automation Platform Server.
-2. In AAP, navigate to the "Inventory" section (using the menu on the left) and create a new group named `windows`. Click `Hosts` and add `webserver1` to the group.
+2. In AAP, navigate to the "Inventories" section (using the menu on the left) and create a new group named `windows` inside the existing `AAP Inventory`. Click `Hosts` and add `webserver1` to the group.
 
 
 
