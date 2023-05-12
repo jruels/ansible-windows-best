@@ -26,10 +26,10 @@ You have two departments in your organization:
 
 - Install IIS, Install MySQL, Configure the web app to use the new MYSQL server by updating its web.config with the MySQL server details
 
-### Create a linux credential
+### Create credentials for Linux server.
 This lab deploys MySQL to our Ubuntu VM. To access it, we need to provide our private SSH key. 
 
-In Putty, run the following command to: 
+In Putty, on the Ubuntu VM, run the following command: 
 
 ```bash
 cat ~/.ssh/id_rsa
@@ -57,91 +57,178 @@ Under **Type Details** fill in:
 
 Go back to the **Resources -> Credentials -> Linux credentials** and note that the SSH key is not visible.
 
-You have now set up credentials for Ansible to access your managed host.
+You have now set up credentials for Ansible to access your Ubuntu managed host.
 
 
 
-### Add your Anible host to the AAP Inventory
+### Add your Ansible host to the AAP Inventory
 
-In the web UI menu on the left side, go to **Resources** → **Inventories**, choose ****
+In the web UI menu on the left side, go to **Resources** → **Inventories**, choose **AAP Inventory**
 
-Provide the following:
+Click **Edit** and **remove** the variables
 
-- **Name**: First Inventory
-- **Description**: My first inventory file
-- **Organization**: Default
+```yaml
+ansible_connection: winrm
+ansible_winrm_transport: ntlm
+ansible_winrm_server_cert_validation: ignore
+```
 
-Click **Save**
 
-At the top of the page click the **Hosts** button, the list will be empty since we have not added any hosts yet.
 
-Let's add our hosts.
-
-For each (`node1`, `node2`) Add the host to the inventory in Automation Platform:
+At the top of the page click the **Hosts** button, and add our `ubuntu_server` host.
 
 Click the **Add** button and give a **Name**, and **Description**:
 
-- **Name**: Server (1 or 2)
-
-- **Description**: Node (1 or 2) from the spreadsheet
+- **Name**: `ubuntu_server`
 
 - Under **Variables** confirm **YAML** is highlighted and then paste the following:
 
   ```
-  ansible_host: <IP of node (1 or 2) from spreadsheet> 
+  ansible_host: <IP of Ubuntu node from spreadsheet> 
   ```
-
-  
 
 - Click **Save**
 
 
 
-create a new host in the AAP Inventory
+Test your new server by going to **Inventories** -> **AAP Inventory** -> **Hosts**, select the `ubuntu_server` and click **Run Command**. 
 
-* name: ubuntu_server 
-* credential: linux
+Select the **ping** module and launch it. 
+
+If everything is successfull you will receive a `pong` from the Ubuntu server.
 
 
-### Set up projects
 
-First you have to set up a reference to the ansible-best-practice-windows repo where the Deploy IIS, Deploy My SQL and Configure web.config playbook are stored
+## Add variables to the Windows group
 
-> **Warning**
->
-> If you are still logged in as user **wweb**, log out of and log in as user **admin**.
+In **Inventories** -> **AAP Inventory**, click **Groups**, and select **windows**. 
 
-Within **Resources** -> **Projects**, click the **Add** button to create a project for the web operations team. Fill out the form as follows:
+Click **Edit** and **add** the following variables:
 
-| Parameter                        | Value                                             |
-| -------------------------------- | ------------------------------------------------- |
-| Name                             | Webops Git Repo                                   |
-| Organization                     | Default                                           |
-| Execution Environment            | Default execution environment                     |
-| Source Control Credential Type   | Git                                               |
-| Source Control URL               | `https://github.com/jruels/workshop-examples.git` |
-| Options                          | ✓ Clean✓ Delete✓ Update Revision on Launch        |
+```yaml
+ansible_connection: winrm
+ansible_winrm_transport: ntlm
+ansible_winrm_server_cert_validation: ignore
+```
 
-Click **Save**
 
-------
+
+## Create playbooks 
+
+In VS Code create the following: 
+
+In the `ansible-working` repository, create a new folder `workflow` and inside of it create a file `deploy_iis.yml` with the following content:
+
+```yaml
+---
+- name: Install IIS on Windows
+  hosts: all
+  become: yes
+  become_method: runas
+  become_user: Administrator
+  tasks:
+  - name: Install IIS Web Server Role
+    win_feature:
+      name: Web-Server
+      state: present
+  - name: Start World Wide Web Publishing Service
+    win_service:
+      name: W3SVC
+      start_mode: auto
+      state: started
+  - name: Create index.html file
+    win_copy:
+      content: "<html><head><title>Workflow</title></head><body><h1>Hello, World!</h1><p>It Works!</p></body></html>"
+      dest: "C:\\inetpub\\wwwroot\\index.html"
+```
+
+Inside of the `workflow` folder create another playbook named `install_mysql.yml`
+
+```yaml
+---
+- name: Install MySQL
+  hosts: all
+  become: true
+  tasks:
+    - name: Install MySQL
+      apt:
+        name: mysql-server
+        state: present
+```
+
+
+
+Inside of the `ansible-working` directory create a `web_deploy_workflow.yml` with: 
+
+```yaml
+- name: Update Web.Config for DB
+  hosts: all
+  become: yes
+  become_method: runas
+  become_user: Administrator
+  roles:
+    - create-web-config
+```
+
+Inside of the `create-web-config` -> `tasks` directory update `main.yml` with:
+
+```jinja2
+---
+- name: create web.config file
+  template:
+    src: templates/web.config.j2
+    dest: c:\inetpub\wwwroot\web.config
+```
+
+
+
+Commit and push your changes to your repository.
+
+**Remember to synchronize your project.**
+
+
+
 ### Set up job templates
 
 Now you have to create two Job Templates like you would for “normal” Jobs.
 
 Within **Resources** -> **Templates**, click the **Add** button and choose **Add job template**:
 
-| Parameter             | Value                                |
-| --------------------- | ------------------------------------ |
-| Name                  | Deploy IIS                           |
-| Job Type              | Run                                  |
-| Inventory             | AAP Inventory                        |
-| Project               | Webops Git Repo                      |
-| Execution Environment | Default execution environment        |
-| Playbook              | `Deploy IIS`                         |
-| Credentials           | win_cred                             |
-| Limit                 | web                                  |
-| Options               | ✓ Privilege Escalation               |
+| Parameter             | Value                         |
+| --------------------- | ----------------------------- |
+| Name                  | Deploy IIS                    |
+| Job Type              | Run                           |
+| Inventory             | AAP Inventory                 |
+| Project               | Ansible Workshop Examples     |
+| Execution Environment | Default execution environment |
+| Playbook              | `workflow/deploy_iis.yml`     |
+| Credentials           | win_cred                      |
+| Limit                 | windows                       |
+| Options               | ✓ Privilege Escalation        |
+
+Click **Save**
+
+------
+
+This template targets our new Linux server. 
+
+We must create a new group, and add it to that group.
+
+1. Go to **Inventories** -> **AAP Inventory** and create a new group named `linux`. Click `Hosts` and add `ubuntu_server` to the group.
+
+Within **Resources** -> **Templates**, click the **Add** button and choose **Add job template**:
+
+| Parameter             | Value                         |
+| --------------------- | ----------------------------- |
+| Name                  | Deploy MySQL                  |
+| Job Type              | Run                           |
+| Inventory             | AAP Inventory                 |
+| Project               | Ansible Workshop Examples     |
+| Execution Environment | Default execution environment |
+| Playbook              | `workflow/install_mysql.yml`  |
+| Credentials           | linux                         |
+| Limit                 | linux                         |
+| Options               | ✓ Privilege Escalation        |
 
 Click **Save**
 
@@ -149,41 +236,21 @@ Click **Save**
 
 Within **Resources** -> **Templates**, click the **Add** button and choose **Add job template**:
 
-| Parameter             | Value                              |
-| --------------------- | ---------------------------------- |
-| Name                  | Deploy MySQL                       |
-| Job Type              | Run                                |
-| Inventory             | AAP Inventory                      |
-| Project               | Webdev Git Repo                    |
-| Execution Environment | Default execution environment      |
-| Playbook              | `Deploy MySQL`                     |
-| Credentials           | linux                              |
-| Limit                 | webservers                         |
-| Options               | ✓ Privilege Escalation             |
+| Parameter             | Value                         |
+| --------------------- | ----------------------------- |
+| Name                  | Update web.config             |
+| Job Type              | Run                           |
+| Inventory             | AAP Inventory                 |
+| Project               | Ansible Workshop Examples     |
+| Execution Environment | Default execution environment |
+| Playbook              | `web_deploy_workflow.yml`     |
+| Credentials           | win_cred                      |
+| Limit                 | Windows                       |
+| Options               |                               |
 
 Click **Save**
 
-------
 
-Within **Resources** -> **Templates**, click the **Add** button and choose **Add job template**:
-
-| Parameter             | Value                              |
-| --------------------- | ---------------------------------- |
-| Name                  | Update web.config                  |
-| Job Type              | Run                                |
-| Inventory             | AAP Inventory                      |
-| Project               | Webdev Git Repo                    |
-| Execution Environment | Default execution environment      |
-| Playbook              | `Web_Deploy_Workflow.yml`          |
-| Credentials           | win_cred                           |
-| Limit                 | webservers                         |
-| Options               | ✓ Privilege Escalation             |
-
-Click **Save**
-
-> **Tip**
->
-> If you want to know what the Ansible Playbooks look like, check out the Github URL and switch to the appropriate branches.
 
 
 ### Set up the workflow
@@ -207,11 +274,11 @@ Click on the **Start** button, an **Add Node** window opens. Assign an action to
 
 Select the **Web App Deploy** job template and click **Save**.
 
-![Add Node](https://aap2.demoredhat.com/exercises/ansible_rhel/2.6-workflows/images/add_node.png)
+<img src="images/image-20230512091939518.png" alt="image-20230512091939518"  />
 
 A new node is shown, connected to the **START** button with the name of the job template. Hover the mouse pointer over the node, you’ll see options to add a node (+), view node details (i), edit the node (pencil), link to an available node (chain), and delete the node (trash bin).
 
-![workflow node](https://aap2.demoredhat.com/exercises/ansible_rhel/2.6-workflows/images/workflow_node.png)
+![image-20230512092043176](images/image-20230512092043176.png)
 
 Hover over the node and click the (+) sign to add a new node.
 
@@ -221,7 +288,7 @@ Hover over the node and click the (+) sign to add a new node.
 
 - For **Node Type** select **Job Template** (default) and choose the **Deploy MySQL** job template. Click **Save**.
 
-  ![Add Nodejs](https://aap2.demoredhat.com/exercises/ansible_rhel/2.6-workflows/images/add_node_nodejs.png)
+  ![image-20230512082029894](images/image-20230512082029894.png)
 
 Click **Save** in the top right corner of the **Visualizier** view.
 
@@ -230,11 +297,9 @@ Hover over the node and click the (+) sign to add a new node.
 
 - For the **Run Type** select **On Success** (default) and click **Next**.
 
-> **TIP**: The run type allows for more complex workflows. You could lay out different execution paths for successful and for failed playbook runs.
-
 - For **Node Type** select **Job Template** (default) and choose the **Update Web.Config** job template. Click **Save**.
 
-  ![Add Nodejs](https://aap2.demoredhat.com/exercises/ansible_rhel/2.6-workflows/images/add_node_nodejs.png)
+  ![image-20230512082124647](images/image-20230512082124647.png)
 
 Click **Save** in the top right corner of the **Visualizier** view.
 
