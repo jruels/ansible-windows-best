@@ -32,3 +32,8 @@ Lab 12: [Ansible Projects & Templates](labs/aap-projects-templates-jobs/)
 Lab 13: [Ansible Tower Surveys](labs/aap-surveys/)   
 Lab 14: [Ansible RBAC](labs/aap-rbac)   
 Lab 15: [Write a module](labs/gh_module)   
+
+### Day 5 
+Lab 16: [Create a Windows Updates template](labs/windows_updates/)   
+Lab 17: [Ansible Tower Workflow](labs/aap-workflows)   
+
