@@ -98,7 +98,7 @@ In the same fashion, add a second **Survey Question**
 - Click **Save**
 - Click the toggle to turn the Survey questions to **Enabled**
 
-Sart the job by clicking the blue **Launch** button, or by clicking on the rocket in the Job Templates overview. 
+Start the job by clicking the blue **Launch** button, or by clicking on the rocket in the Job Templates overview. 
 
 When prompted, choose update categories. answer `No` to *Reboot after install?* and click next.
 
