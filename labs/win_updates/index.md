@@ -49,8 +49,8 @@ Fill in the following:
 * **Execution Environment**: Default execution environment 
 * **Playbook**: `win_updates/site.yml`
 * **Credentials**: win_cred
-* Click **Save**
-* **Options**: Enable Fact Cache
+* **Options**: Enable Fact Storage
+* * Click **Save**
 
 
 
@@ -62,8 +62,8 @@ Fill out the form:
 
 - **Question**: Categories
 - **Description**: Which Categories to install?
-- **Answer Variable Name**: categories
-- **Answer Type**: Multiple Choice (multiple select)
+- **Answer variable name**: categories
+- **Answer type**: Multiple Choice (multiple select)
   - Multiple Choice Options
     - Application
     - Connectors
@@ -88,8 +88,8 @@ In the same fashion, add a second **Survey Question**
 
 - **Question**: Reboot after install?
 - **Description**: If the server needs to reboot,  then do so after install.
-- **Answer Variable Name**: reboot_server
-- **Answer Type**: Multiple choice (single select)
+- **Answer variable name**: reboot_server
+- **Answer type**: Multiple choice (single select)
   - Multiple Choice Options
     - Yes
     - No
