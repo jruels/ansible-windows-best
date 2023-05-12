@@ -245,7 +245,7 @@ Within **Resources** -> **Templates**, click the **Add** button and choose **Add
 | Execution Environment | Default execution environment |
 | Playbook              | `web_deploy_workflow.yml`     |
 | Credentials           | win_cred                      |
-| Limit                 | Windows                       |
+| Limit                 | windows                       |
 | Options               |                               |
 
 Click **Save**
