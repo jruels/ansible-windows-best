@@ -85,7 +85,9 @@ In the VS Code Explorer pane:
            force: yes
        - name: Ensure IIS is started
          win_service:
+         {% raw %}
            name: "{{ service_name }}"
+         {% endraw %}
            state: started
    ```
    
