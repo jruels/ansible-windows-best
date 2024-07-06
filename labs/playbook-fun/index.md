@@ -12,7 +12,7 @@ In this lab, you will learn how to use Ansible to manage Windows hosts using the
 
 
 ### Setting up the Inventory File
-Perform the following steps on Windows Target 1 in VS Code
+Perform the following steps on the Windows Host in VS Code
 In the VS Code Explorer pane:
 
 1. Right Click the `ansible-working` repo in the explorer pane
@@ -112,7 +112,7 @@ Save all files
 
 ## Update the Ansible Control Host
 
-1. Return to the connection to your Ansible control host in PuTTY on Windows Target 1.
+1. Return to the connection to your Ansible control host in PuTTY on the Windows host.
 2. Navigate to the directory where you cloned repository.
 3. Run `git pull` to update the repository on the control host.
 5. Run the playbook using the following command:
