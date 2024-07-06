@@ -10,7 +10,7 @@ Before starting this lab, you should have the following:
 - A control node with Ansible installed
 
 ## Step 1: Run Ad-hoc commands
-Run the following commands in the Ansible Control PuTTY window on Windows Target 1.   
+Run the following commands in the Ansible Control PuTTY window on the Windows host.   
 Our `ansible.cfg` file should still have `ansible_vars.yml` set as the default inventory
 
 1. Run the following ad-hoc command to check if the Windows host is reachable:
