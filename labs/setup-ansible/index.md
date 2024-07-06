@@ -4,11 +4,11 @@ In this hands-on lab, we'll install Ansible on a control node and configure two 
 
 ## Log into the control node
 
-Perform the following steps in the RPD session to Windows Target 1
+Perform the following steps in the RPD session to the Windows Host
 
 1. Launch PuTTY
 1. Load Default settings
-1. Paste ip address (provided by instructor)
+1. Paste IP address (provided by instructor)
 1. Click Open
 1. Click Yes to accept the cert
 
@@ -43,7 +43,7 @@ exit
 Install Win RM
 
 ```
-pip3 install "pywinrm>=0.3.0"
+pip3 install pywinrm
 ```
 
 Install boto3 and botocore
@@ -61,7 +61,7 @@ Back on the Windows machine, in the VS Code Explorer pane:
 5. Paste the code below into the file
 
     ```
-   ---
+---
     webservers:
       hosts:
         webserver1:
@@ -76,11 +76,11 @@ Back on the Windows machine, in the VS Code Explorer pane:
           ansible_user: ubuntu
           ansible_ssh_private_key_file: /home/ubuntu/.ssh/id_rsa
     ```
-          
+
 > In the real world we would not want to store the windows credentials in plain text in our inventory file. We will deal with this issue in the vault lab.    
- 
+
 ## Create an ansible.cfg file to set ansible defaults including the inventory file to use
- 
+
  In the VS Code Explorer pane:
 
 1. Right Click in the explorer pane
@@ -99,7 +99,7 @@ INVENTORY = inventory_simple.yml
 2. In the file menu select Save All
 3. In the "Source Control" pane, review the changes you made to the file.
 4. Under the `ansible-working` repo, enter a commit message that describes the changes you made.
-5. Click the checkmark icon to commit the changes.  
+5. Click the "Commit" button to commit the changes.  
 6. Click "yes", if prompted to stage all files. 
 If you get an error about "user.email" and "user.name" not being set, do the following. 
 
@@ -114,7 +114,7 @@ If you get an error about "user.email" and "user.name" not being set, do the fol
 
 ## Update the Ansible Control Host
 
-1. Return to the connection to your Ansible control host in PuTTY on Windows Target 1.
+1. Return to the connection to your Ansible control host in PuTTY on the Windows Host.
 2. Clone the `ansible-working` repository you created earlier. 
 3. Return to GitHub and copy the https url to your `ansible-working` repository. 
 4. Clone the `ansible-working` repository to retrieve our `inventory_simple.yml` and `ansible.cfg` files.
@@ -144,12 +144,12 @@ ansible webserver2 -m ping
 
 > The `webserver1` host will fail because we have not yet enabled WinRM or opened its ports on the firewall. Also notice we get the same results with or without -i inventory_simple.yml
 > The `webserver2` host will prompt you to accept the key. Type `yes` to confirm and it will respond with a `pong`.
-  
+
 ## Enable WinRM on Windows Targets
 
 Now, we'll configure WinRM for each windows node by creating a key using it to create a listener then opening the ports on the firewall.
 
-Perform the following steps in the RDP session for Windows Target 1.
+Perform the following steps in the RDP session for the Windows Host.
 
 In the VS Code Explorer pane:
 
@@ -174,7 +174,7 @@ In the VS Code Explorer pane:
   # Restart WinRM
   Restart-Service winrm
   ```
-    
+
 5. Execute the Script 
 1. Save, Commit and Sync the PowerShell Script with GitHub
 2. Open PowerShell and run
@@ -200,7 +200,7 @@ Lets use the `ping` and `win_ping` modules again to enure that we can access the
   ```
   ansible webserver1 -m win_ping > output 
   ```
-  
+
   Confirm the output was redirected successfully. 
   ```
   cat output
