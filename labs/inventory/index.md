@@ -28,7 +28,7 @@ These instructions will guide you through the process of provisioning an IIS (In
 - Pip3 installed on the Windows host
 
 ### Inventory File
-Perform the following steps in VS Code on Windows Target 1
+Perform the following steps in VS Code on then Windows Host
 
 In the VS Code Explorer pane:
 
@@ -127,7 +127,7 @@ INVENTORY = inventory_vars.yml
 
 ## Update the Ansible Control Host
 
-1. Return to the connection to your Ansible control host in PuTTY on Windows Target 1.
+1. Return to the connection to your Ansible control host in PuTTY on the Windows Host.
 2. Navigate to the directory where you cloned repository.
 3. Run `git pull` to update the repository on the control host.
 
@@ -163,13 +163,13 @@ ansible-playbook <path to playbook YAML file> -i <path to inventory file>
 Replace `<path to playbook YAML file>` with the path to your playbook YAML file, and `<path to inventory file>` with the path to your inventory file.
 
 For example, to create a playbook that installs IIS using the `win_feature` module, create a YAML file with the following content:
-Remember to create, save and synce the file in VS Code on Windows Target 1
+Remember to create, save and synce the file in VS Code on the Windows Host. 
 
 In the VS Code Explorer pane:
 
 1. Right Click in the explorer pane
 1. Select `New File`
-1. Name the new file 'install_iis.yml'
+1. Name the new file `install_iis.yml`
 1. Paste the code below into the file
 
 ```yml
@@ -192,7 +192,7 @@ In the VS Code Explorer pane:
 
 ## Update the Ansible Control Host
 
-1. Return to the connection to your Ansible control host in PuTTY on Windows Target 1.
+1. Return to the connection to your Ansible control host in PuTTY on the Windows Host.
 2. Navigate to the directory where you cloned repository.
 3. Run `git pull` to update the repository on the control host.
 4. Execute the playbook.
