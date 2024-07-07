@@ -60,7 +60,6 @@ In the VS Code Explorer pane:
 1. Copy the following YAML code to the `playbook.yml` file:
 
    ```
-{% raw %}
    ---
    - name: Ensure IIS is installed and started 
      hosts: webservers
@@ -85,6 +84,7 @@ In the VS Code Explorer pane:
            dest: c:\inetpub\wwwroot\
            force: yes
        - name: Ensure IIS is started
+{% raw %}
          win_service:
            name: "{{ service_name }}"
            state: started
