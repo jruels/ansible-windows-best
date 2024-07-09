@@ -58,7 +58,7 @@ Click [Here](https://access.redhat.com/downloads/content/480) to download the An
 
 * Log in to the portal 
 
-* Download Ansible Automation Platform 2.3 for RHEL 9
+* Download Ansible Automation Platform for RHEL 9
 
   <img src="images/image-20230509011301795.png" alt="image-20230509011301795" style="zoom:50%;" />
 
