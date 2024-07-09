@@ -47,7 +47,9 @@ Next, you need to create the Jinja2 template that will be used to generate the `
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <appSettings>
+  {% raw %}
     <add key="sqlConnectionString" value="Server={{ ip_address }};Database={{ database_name }};User ID={{ db_username }};Password={{ db_password }};"/>
+  {% endraw %}
   </appSettings>
 </configuration>
 ```
