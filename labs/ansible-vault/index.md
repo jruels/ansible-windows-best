@@ -5,7 +5,7 @@
 In this lab, you will learn how to use Ansible Vault to encrypt sensitive data in a playbook. You will create a new playbook that uses a vault-encrypted variable file to deploy a website on a Windows host.
 
 ## Lab Steps
-Perform the following steps on Windows Target 1 in VS Code
+Perform the following steps on Windows in VS Code
 
 1. In Visual Studio Code and open the `ansible-working` repository created in a previous lab.
 2. Create a new directory named `vault` in the `ansible-working` repository.
