@@ -13,7 +13,7 @@ Before starting this lab, you should have the following:
 - A GitHub account.
 
 ## Step 1: Set Default connection account for Ansible
-Perform the followig steps on the Windows Host in VS Code
+Perform the following steps on the Windows Host in VS Code
 
 Configure Ansible to connect with the `ansible` user account we will create in a later next step.
 
