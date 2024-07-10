@@ -173,7 +173,7 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
 
 ## Step 10: Update the Ansible Control Host
 
-1. Return to the connection to your Ansible control host in PuTTY on Windows Target 1.
+1. Return to the connection to your Ansible control host in PuTTY on Windows.
 2. Navigate to the directory where you cloned repository.
 3. Run `git pull` to update the repository on the control host.
 
