@@ -84,7 +84,7 @@ git push
 15. Run the `deploy_website.yml` playbook against the Windows host using the following command:
 
 ```
-ansible-playbook deploy_website.yml --ask-vault-pass
+ansible-playbook -i inventory_groups.yml deploy_website.yml --ask-vault-pass
 ```
 
 16. When prompted, enter the password used to encrypt the `secrets.yml` file.
