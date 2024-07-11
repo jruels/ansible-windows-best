@@ -91,8 +91,9 @@ Now log out of Automation Controller’s web UI and in again as the **wweb** use
 - In the following **Jobs** view have a good look around, note that there were changes to the host (as expected).
 
 After the Job has finished, confirm that IIS was uninstalled by running the following PowerShell command on the Windows node.
-
+```
 get-windowsfeature web-server
+```
 
 You enabled a restricted user to run an Ansible playbook
 
