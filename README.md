@@ -28,12 +28,12 @@ Lab 9: [Ansible Roles](labs/roles/)
 Lab 10: [Ansible Tower Tasks](labs/aap-inventory-creds-ad-hoc/)   
 
 ### Day 4   
-Lab 12: [Ansible Projects & Templates](labs/aap-projects-templates-jobs/)   
-Lab 13: [Ansible Tower Surveys](labs/aap-surveys/)   
-Lab 14: [Ansible RBAC](labs/aap-rbac)   
-Lab 15: [Write a module](labs/gh_module)   
+Lab 11: [Ansible Projects & Templates](labs/aap-projects-templates-jobs/)   
+Lab 12: [Ansible Tower Surveys](labs/aap-surveys/)   
+Lab 13: [Ansible RBAC](labs/aap-rbac)   
+Lab 14: [Write a module](labs/gh_module)   
 
 ### Day 5 
-Lab 16: [Create a Windows Updates template](labs/win_updates/)   
-Lab 17: [Ansible Tower Workflow](labs/aap-workflows)   
+Lab 15: [Create a Windows Updates template](labs/win_updates/)   
+Lab 16: [Ansible Tower Workflow](labs/aap-workflows)   
 
