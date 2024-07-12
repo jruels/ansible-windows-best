@@ -303,7 +303,6 @@ Hover over the node and click the (+) sign to add a new node.
 
   ![image-20230512082029894](images/image-20230512082029894.png)
 
-Click **Save** in the top right corner of the **Visualizier** view.
 
 
 Hover over the node and click the (+) sign to add a new node.
