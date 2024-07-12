@@ -15,8 +15,10 @@ Create a new folder `win_updates` and inside of it create a file `site.yml` with
   tasks:
     - name: Install Windows Updates
       win_updates:
+      {% raw %}
         category_names: "{{ categories | default(omit) }}"
         reboot: '{{ reboot_server | default(true) }}'
+      {% endraw %}
 ```
 
 This is a very basic playbook for installing Windows Updates. Typically you would have even more tasks to accomplish the entire update process. This might entail creating service tickets, creating snapshots, or disabling monitoring.
