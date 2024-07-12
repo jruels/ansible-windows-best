@@ -186,7 +186,9 @@ Confirm the `templates` `web.config.j2` file has the following:
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <appSettings>
+  {% raw %}
     <add key="sqlConnectionString" value="Server=;Database=;User ID=;Password=;"/>
+  {% endraw %}
   </appSettings>
 </configuration>
 ```
