@@ -187,7 +187,7 @@ Confirm the `templates` `web.config.j2` file has the following:
 <configuration>
   <appSettings>
   {% raw %}
-    <add key="sqlConnectionString" value="Server=;Database=;User ID=;Password=;"/>
+    <add key="sqlConnectionString" value="Server={{ ip_address }};Database={{ database_name }};User ID={{ db_username }};Password={{ db_password }};"/>
   {% endraw %}
   </appSettings>
 </configuration>
