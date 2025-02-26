@@ -49,7 +49,7 @@ Continue to do the following steps inside of Window Target 1 RDP Session
   1. In the new repository click the `code` button to expose the `https url` for the repository
   1. Click the copy button to copy the `https url` for the repo to use in the next step
 
-## Open the newly create repository in VS Code
+## Open the newly created repository in VS Code
 
   1. Launch VS Code from the Start Menu or Task Bar
   1. Select the Source Control Tab from the toolbar on the left
