@@ -6,11 +6,31 @@ In this hands-on lab, we'll install Ansible on a control node and configure two 
 
 Perform the following steps in the RPD session to the Windows Host
 
-1. Launch PuTTY
-1. Load Default settings
-1. Paste IP address (provided by instructor)
-1. Click Open
-1. Click Yes to accept the cert
+**Download and Extract the Lab Files**
+
+1. At the top of the lab page, click **View on GitHub**.
+1. Click the green **Code** button in the top right corner.
+1. Select **Download as ZIP**.
+1. Once the download is complete, extract the ZIP file to a location you can easily access.
+
+**Launch PuTTY**
+
+1. Open **PuTTY** on your computer.
+2. Use the following SSH credentials:
+   1. Username: **ubuntu**
+   2. Follow the below steps to authenticate using an SSH key
+
+### Set up Putty
+
+Open Putty and configure a new session.
+
+![img](https://jruels.github.io/openshift-admin/labs/openshift-deploy/images/putty-session.png)
+
+Expand Connection -> SSH -> Auth -> Credentials, click “Browse”, and then choose the `lab.ppk` file from the extracted lab directory
+
+![image-20230918185300995](https://jruels.github.io/openshift-admin/labs/openshift-deploy/images/putty-auth.png)
+
+Remember to save your session.
 
 ## Install Ansible on the Control Node
 
@@ -32,13 +52,13 @@ Install Ansible using pip3
 pip3 install ansible
 ```
 
-Log out and back into the Ubuntu VM to update the path and complete Ansible setup
+Log out and back into the Control VM to update the path and complete Ansible setup
 
 ```
 exit
 ```
 
-> You will need to reconnect to the Ubuntu server with Putty.
+> You will need to reconnect to the Control server with Putty.
 
 Install Win RM
 
@@ -60,7 +80,6 @@ Back on the Windows machine, in the VS Code Explorer pane:
 4. Name the new file `inventory_simple.yml`
 5. Paste the code below into the file
 
-    ```
 ---
     webservers:
       hosts:
