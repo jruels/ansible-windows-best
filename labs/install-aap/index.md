@@ -176,6 +176,7 @@ aap.localhost.com ansible_connection=local
 
 [all:vars]
 admin_password='Password1234'
+redis_mode= standalone
 
 pg_host=''
 pg_port=''
