@@ -43,16 +43,16 @@ Next, you need to create the Jinja2 template that will be used to generate the `
 7. Name the file `web.config.j2`.
 8. Copy and paste the following code into `web.config.j2`:
 
+{% raw %}
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <appSettings>
-  {% raw %}
-    <add key="sqlConnectionString" value="Server={{ ip_address }};Database={{ database_name }};User ID={{ db_username }};Password={{ db_password }};"/>
-  {% endraw %}
+    <add key="sqlConnectionString" value="Server={{ ip_address }} ;Database={{ database_name }};User ID={{ db_username }};Password={{ db_password }};"/> 
   </appSettings>
 </configuration>
 ```
+{% endraw %}
 
 This template includes a configuration option to update the database connection string including:
 
