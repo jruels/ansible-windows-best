@@ -27,7 +27,7 @@ Configure Ansible to connect with the `ansible` user account we will create in a
 
    This tells Ansible to connect to the remote Windows machine using the `ansible` user account.
 
-2. Save the `ansible.cfg` file and close it.
+2. Save the `ansible.cfg` file and close it.  Commit and Push to your Ansible-Working repository.
 
 ## Step 2: Create 4 roles
 1. Create the `create-user` role
