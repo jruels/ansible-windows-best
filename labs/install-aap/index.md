@@ -198,6 +198,8 @@ Set the following in the `inventory` file (if not already completed)
 * registry_username = The username generated earlier in the lab (i.e 15765574|ansible-tower)   
 * registry_password = The token you generated earlier in the lab.   
 
+```
+
 Run installation script
 
 ```bash
