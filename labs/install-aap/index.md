@@ -167,7 +167,7 @@ rm -rf inventory
 ```
 
 
-Create a new `inventory` file with the following:
+Create a new `inventory` file with the following (vi inventory):
 ```
 [automationcontroller]
 aap.localhost.com ansible_connection=local
