@@ -80,8 +80,7 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
        password: Password123
        state: present
        groups:
-         - Administrators
-     become: yes  
+         - Administrators  
      ignore_errors: yes
      register: result
    ```
@@ -138,9 +137,6 @@ User the explorer pane in VS Code to navigate to the appropriate folders and edi
    ---
    - name: Install IIS and configure website
      hosts: windows
-     become: yes
-     become_method: runas
-     become_user: Administrator
      vars:
          ansible_user: administrator
          ansible_password: JustM300
