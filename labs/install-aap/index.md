@@ -191,6 +191,9 @@ pg_password='Password1234'
 registry_url='registry.redhat.io'
 registry_username='16952772|AnsibleWindows'
 registry_password='eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI1OWFiZmJjMjQ1ZDc0ODMzYjQ2ZjYzN2VlMzg2Njg3NCJ9.rhX7QzDHRMvawiRTtTD7HNlsWtJaxaixqADdhudYg9-NlB7GE3SLcBpEbBgL5ope0ZAsf2JhCU_EkMhxqNLqCljbD8Oqccwcp7eIy28c3Pho0GDe2WNWp59vKQMVntGYTtxoxR-JjDXYNfCF0NeAY2da2HSsmJUnfEu9LQqu220qAtn6WBj6nrxCrQcwnaCkLp2YipwlEqy7vwhvQjJDzJAqEzBKg_pimSmbpu0ImTHCz50oPF23I6-DSViJ6LR8VAzAJbAe4ZDaspzAQ0nBs1i8f7ThuZ4mYgLusHg1mHBEQyY5fLVXaQH-224yygN80U-YxLVrywJmAfrqAWkuv_lvZ7JwV6Ow8Yoq2TzSY116NLNkAPOeS91VFf0DdlUmy1JKgc8Gy2lrkjcVi9SQ878tiTKEJfl7eAu2Ru9eI5He3qeAZLwfIlEGX4lahTsttZvS5pFxSOz3vmg6Q2Yr6SZZnr1e03hlQZbTDH1LcbkDqziA4L__NE7VkhdtDaNV6mcz3EiIPyfPs9q-_fGNGq-2dO1RiDeP5Dfy64JuUj3S-pFA_tzKBQvr_DSy8Wel8ecf5JKpxhJL-pvJDm9sKCeN_iTmAw9hzGN0qVdXOjODdUxJulol2aF5FRC_VKhCN8HXnft172WTeGRhv3TvxPkZ-2xQ9gEul1USfWXFTs4'
+
+```
+
 Set the following in the `inventory` file (if not already completed) 
 
 * admin password = Password1234   
@@ -198,7 +201,6 @@ Set the following in the `inventory` file (if not already completed)
 * registry_username = The username generated earlier in the lab (i.e 15765574|ansible-tower)   
 * registry_password = The token you generated earlier in the lab.   
 
-```
 
 Run installation script
 
