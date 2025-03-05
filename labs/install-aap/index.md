@@ -147,13 +147,13 @@ sudo vi /etc/hosts
 
 
 
-Now add `aap.localhost.com` to the end of the line beginning with `127.0.0.1` so it looks like this:
+Now add `aap.localhost.com` to the end of the line beginning with `127.0.0.1` (press insert to edit) so it looks like this:
 
 ```
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 aap.localhost.com
 ```
 
-Save the file and run the following to test.
+Save the file and run the following to test. (press ESC then :wq to save and exit)
 
 ```
 ping aap.localhost.com
