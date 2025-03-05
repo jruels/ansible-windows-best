@@ -27,9 +27,9 @@ ansible_winrm_server_cert_validation: ignore
 ip_address: 192.168.2.2
 database_name: Adventrueworks
 ```
-Commit and push the files to the `ansible-working` repository.
+Commit and push the files to the `ansible-working` repository and git pull to the Ansible Control Node.
 
-5. Encrypt the `secrets.yml` file using Ansible Vault with the following command:
+5. On the Ansible Control Node Encrypt the `secrets.yml` file using Ansible Vault with the following command:
 
 ```
 ansible-vault encrypt vault/secrets.yml
