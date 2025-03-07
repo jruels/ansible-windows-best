@@ -285,7 +285,7 @@ After saving the template the **Workflow Visualizer** opens to allow you to buil
 
 Click on the **Start** button, an **Add Node** window opens. Assign an action to the node, via node type by selecting **Job Template**.
 
-Select the **Web App Deploy** job template and click **Save**.
+Select the **Deploy IIS** job template and click **Save**.
 
 <img src="images/image-20230512091939518.png" alt="image-20230512091939518"  />
 
