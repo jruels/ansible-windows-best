@@ -180,6 +180,16 @@ Inside of the `create-web-config` -> `tasks` directory update `main.yml` with:
     dest: c:\inetpub\wwwroot\web.config
 ```
 
+Inside of the `create-web-config` -> `vars ` directory update `main.yml` with:
+
+```jinja2
+---
+# vars file for create-web-config
+    ip_address: <ip address of ubuntu server>
+    database_name: mydatabasedev
+    db_username: sqluser
+    db_password: Pa$$w0rd
+```
 Confirm the `templates` `web.config.j2` file has the following: 
 
 ```jinja2
